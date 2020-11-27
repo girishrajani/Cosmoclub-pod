@@ -1,0 +1,35 @@
+<html>
+   
+    <head>
+        <title>Picture of the day</title>
+        <style>
+
+        </style>
+        <script>
+            function loadImage() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = this.response;
+                    console.log(this.response);
+                    var json = JSON.parse(data);
+                    image = json["url"]
+                    var img = document.createElement("img");
+                    img.src = image;
+                    img.alt = "Image of the day"
+                    img.style = "max-width: 100%; height: auto;";
+                    var srsc = document.getElementById("x");
+                    srsc.appendChild(img); 
+                }
+            };
+                xhttp.open("GET","https://api.nasa.gov/planetary/apod?api_key=NDFseOpR8d8e9mK5Cz1dxYjF1BgwvrTdKnjazMxN", true);
+                xhttp.send();
+            }
+        </script>
+    </head>
+    <body>
+        <div id="x">
+            <script>loadImage();</script>
+        </div>
+    </body>
+</html>
